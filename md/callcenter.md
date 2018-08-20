@@ -16,8 +16,7 @@ Já trabalhei com dezenas de linguagens e tecnologias em projetos tanto para o Br
 
 Atualmente (Dependendo do Dia) sou Desenvolvedor / Líder Técnico e Gerente de Desenvolvimento de Software.
 
-## Funciona um CallCenter
-Um CallCenter, ou Contact Center, é uma empresa especializada em prestar o serviço de receber um conjunto de dados sobre pessoas
+## Como Funciona um CallCenter?
 a serem contactadas e realizar uma série de ações de contato com essas pessoas. 
 
 A Zanc é uma empresa de CallCenter de Cobrança em que o objetivo do contato é o pagamento de uma dívida que um cliente tem com 
@@ -42,8 +41,7 @@ sobre cada um dos CPFs na base de dados, uma vez que um cliente pode estar deven
 informação de acionamento de um CRM pode e deve ser usada por outro CRM de outro convênio.
 
 ## Porque Python?
-Podemos ver que a maior parte dos fluxos de dados dentro da empresa tem a necessidade de pequenos ajustes de programação diários e que
-devem ser feitos no momento em que o problema é detectado.
+Podemos ver que a maior parte dos fluxos de dados dentro da empresa tem a necessidade de pequenos ajustes de programação diários e que devem ser feitos no momento em que o problema é detectado.
 
 A Empresa sempre usou bastante .NET e PHP nos seus processos internos, mas, existe a necessidade de treinar pessoas sem formação em 
 programação para que programassem pequenos programas para pequenos tratamentos de arquivos e de ajustes em dados ou analises.
