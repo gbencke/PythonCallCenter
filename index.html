@@ -1,314 +1,315 @@
 <!doctype html>
 <html>
 
-	<head>
-		<meta charset="UTF-8" />
-		<title>Multcall / URA 2.0 - Tutorial</title>
-		<link rel="stylesheet" href="./css/reveal.min.css" />
-		<link rel="stylesheet" href="./lib/css/zenburn.css">
-		<link rel="stylesheet" href="./css/theme/league.css" />
-		<!--
-		   <link rel="stylesheet" type="text/css" href="./css/print/pdf.css">
-		-->
-		<style>
-			body>div>div.slides>section.present>ul>li>strong {
-			    text-decoration: underline
-			}
+        <head>
+                <meta charset="UTF-8" />
+                <title>Multcall / URA 2.0 - Tutorial</title>
+                <link rel="stylesheet" href="./css/reveal.min.css" />
+                <link rel="stylesheet" href="./lib/css/zenburn.css">
+                <link rel="stylesheet" href="./css/theme/league.css" />
+                <!--
+                        <link rel="stylesheet" type="text/css" href="./css/print/pdf.css">
+                -->
+                <style>
 
-			body>div>div.slides>section.present>ul>li {
-			    font-size: 32px !important
-			}
-			.texto-medio {
-			    font-size: 32px !important;
-			    overflow: hidden !important
-			}
+body>div>div.slides>section.present>ul>li>strong {
+        text-decoration: underline
+}
 
-			.justificado {
-			    text-align: justify !important;
+                        body>div>div.slides>section.present>ul>li {
+                                font-size: 32px !important
+                        }
+                        .texto-medio {
+                                font-size: 32px !important;
+                                overflow: hidden !important
+                        }
 
-			}
-		</style>
-	</head>
+                        .justificado {
+                                text-align: justify !important;
 
-	<body>
-		<div class="reveal">
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
+                        }
+                </style>
+        </head>
 
-				<section>
-					<h3>Multcall e URA 2.0</h3>
-					<BR>
-					<BR>
-					<BR>
-					<h4>Guilherme Bencke</h4>
-					<h4>Porto Alegre - Janeiro, 2018</h4>
-				</section>
+        <body>
+                <div class="reveal">
+                        <!-- Any section element inside of this container is displayed as a slide -->
+                        <div class="slides">
 
-
-				<section>
-					<h2>Oque é o Multcall</h2>
-					<p class="justificado">O Multcall é o sistema discador desenvolvido pela própria zanc pelos ultimos 10 anos. Ele é escrito em .NET e utiliza um banco de dados SQL Server
-						tanto para os dados internos da aplicação quanto os dados do négócio (Clientes, Ligações, Contatos, etc...)</p>
-					<p class="justificado">Atualmente a Zanc tem testado diversos outras plataformas de discagem, mas, o retorno ao negócio não tem sido significativo o suficiente para
-						justificar o custo adicional de licenças de um software terceiro.</p>
-				</section>
-
-				<section>
-					<h2>Arquitetura Atual do MultCall 1.0
-					</h2>
-					<img src="./i/Arquitetura.Multcall1.0.jpg" style="width: 80%; height: 80%" />
-				</section>
+                                <section>
+                                        <h3>Multcall e URA 2.0</h3>
+                                        <BR>
+                                        <BR>
+                                        <BR>
+                                        <h4>Guilherme Bencke</h4>
+                                        <h4>Porto Alegre - Janeiro, 2018</h4>
+                                </section>
 
 
+                                <section>
+                                        <h2>Oque é o Multcall</h2>
+                                        <p class="justificado">O Multcall é o sistema discador desenvolvido pela própria zanc pelos ultimos 10 anos. Ele é escrito em .NET e utiliza um banco de dados SQL Server
+                                        tanto para os dados internos da aplicação quanto os dados do négócio (Clientes, Ligações, Contatos, etc...)</p>
+                                        <p class="justificado">Atualmente a Zanc tem testado diversos outras plataformas de discagem, mas, o retorno ao negócio não tem sido significativo o suficiente para
+                                        justificar o custo adicional de licenças de um software terceiro.</p>
+                                </section>
+
+                                <section>
+                                        <h2>Arquitetura Atual do MultCall 1.0
+                                        </h2>
+                                        <img src="./i/Arquitetura.Multcall1.0.jpg" style="width: 80%; height: 80%" />
+                                </section>
 
 
-				<section>
-					<h2>Problemas com o Multcall 1.0
-					</h2>
-					<p class="justificado">Com o passar do tempo, as limitações do Multcall 1.0 começaram a aparecer.
-						Em termos concretos, os problemas do Multcall Atualmente são:</p>
-
-					<ul style="font-size: 24px">
-						<li><strong>Escalabilidade</strong>: Capacidade de facilmente aumentar o numero de operadores logados.</li>
-						<li><strong>Versao Asterisk</strong>: Atrelamento fixo do Multcall a uma especifica versão do Multcall</li>
-						<li><strong>Balanceamento de Carga</strong>: Dificuldade em distribuir a carga de ligações entre diversas centrais.</li>
-					</ul>
-
-				</section>
-
-				<section>
-					<h2>Escalabilidade (1)
-					</h2>
-					<p class="justificado">Um dos grandes problemas com o Multcall 1.0 é que o mesmo banco de dados serve tanto para os dados do negocio quanto para os dados
-						internos da aplicação (Direitos, Operadores Disponiveis, Filas de Discagem, etc...), dessa forma, o quanto mais operadores você colocar em uma
-						operação, mais o sistema irá ter a sua performance degradada. </p>
-				</section>
-
-				<section>
-					<h2>Escalabilidade (2)
-					</h2>
-					<p class="justificado">Um dos exemplos mais claros é a questão das leituras de parametros, pois por ser um sistema em tempo real em que a reconfiguração dos parametros
-						do sistema tem que ter impacto direto na operação, essa leitura de parametros (que não pertencem ao negocio em si) pode causar lentidão em operações
-						de sistema como a carga e/ou manipulação de um mailing.</p>
-				</section>
-
-				<section>
-					<h2>Versão Asterisk
-					</h2>
-					<p class="justificado">A Versão atual do MultCall conecta o codigo .NET diretamente a Central Telefonica, oque causa 2 problemas:</p>
-					<ul style="font-size: 24px">
-						<li>Não existe suporte oficial do Asterisk ao .NET, dessa forma, deve haver uma "Adaptação" de bibliotecas terceiras para que funcione corretamente</li>
-						<li>Essa adaptação tem que ser testada em todas as versões do Asterisk, pois não é garantido que funcionará em todas as situações.</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Balanceamento de Carga
-					</h2>
-					<p class="justificado">Atualmente para balanceamento de carga, o Multcall se conecta com o AsteriskProxy que é um programa provido pelo próprio asterisk para balanceamento
-						e distribuição de carga. Esse software não é mais suportado pelo Asterisk, oque causa uma série de problemas de suporte, além desse programa ser relativamente instável oque causa paradas na operação.</p>
-				</section>
 
 
-				<section>
-					<h2>Arquitetura MultCall 2.0
-					</h2>
-					<img src="./i/Arquitetura.Multcall.2.0.jpg" style="width: 80%; height: 80%" />
-				</section>
+                                <section>
+                                        <h2>Problemas com o Multcall 1.0
+                                        </h2>
+                                        <p class="justificado">Com o passar do tempo, as limitações do Multcall 1.0 começaram a aparecer.
+                                        Em termos concretos, os problemas do Multcall Atualmente são:</p>
+
+                                        <ul style="font-size: 24px">
+                                                <li><strong>Escalabilidade</strong>: Capacidade de facilmente aumentar o numero de operadores logados.</li>
+                                                <li><strong>Versao Asterisk</strong>: Atrelamento fixo do Multcall a uma especifica versão do Multcall</li>
+                                                <li><strong>Balanceamento de Carga</strong>: Dificuldade em distribuir a carga de ligações entre diversas centrais.</li>
+                                        </ul>
+
+                                </section>
+
+                                <section>
+                                        <h2>Escalabilidade (1)
+                                        </h2>
+                                        <p class="justificado">Um dos grandes problemas com o Multcall 1.0 é que o mesmo banco de dados serve tanto para os dados do negocio quanto para os dados
+                                        internos da aplicação (Direitos, Operadores Disponiveis, Filas de Discagem, etc...), dessa forma, o quanto mais operadores você colocar em uma
+                                        operação, mais o sistema irá ter a sua performance degradada. </p>
+                                </section>
+
+                                <section>
+                                        <h2>Escalabilidade (2)
+                                        </h2>
+                                        <p class="justificado">Um dos exemplos mais claros é a questão das leituras de parametros, pois por ser um sistema em tempo real em que a reconfiguração dos parametros
+                                        do sistema tem que ter impacto direto na operação, essa leitura de parametros (que não pertencem ao negocio em si) pode causar lentidão em operações
+                                        de sistema como a carga e/ou manipulação de um mailing.</p>
+                                </section>
+
+                                <section>
+                                        <h2>Versão Asterisk
+                                        </h2>
+                                        <p class="justificado">A Versão atual do MultCall conecta o codigo .NET diretamente a Central Telefonica, oque causa 2 problemas:</p>
+                                        <ul style="font-size: 24px">
+                                                <li>Não existe suporte oficial do Asterisk ao .NET, dessa forma, deve haver uma "Adaptação" de bibliotecas terceiras para que funcione corretamente</li>
+                                                <li>Essa adaptação tem que ser testada em todas as versões do Asterisk, pois não é garantido que funcionará em todas as situações.</li>
+                                        </ul>
+                                </section>
+
+                                <section>
+                                        <h2>Balanceamento de Carga
+                                        </h2>
+                                        <p class="justificado">Atualmente para balanceamento de carga, o Multcall se conecta com o AsteriskProxy que é um programa provido pelo próprio asterisk para balanceamento
+                                        e distribuição de carga. Esse software não é mais suportado pelo Asterisk, oque causa uma série de problemas de suporte, além desse programa ser relativamente instável oque causa paradas na operação.</p>
+                                </section>
 
 
-				<section>
-					<h2>Multcall 2.0
-					</h2>
-					<p class="justificado">Como podemos ver na figura anterior, para resolver os 3 problemas atuais do Multcall, criamos uma camada intermediaria entre o multcall e a central aonde
-						colocar um banco de dados de alta performance chamada Redis.</p>
-					<p class="justificado">Dessa forma, o Multcall escreve no banco de dados Redis sem contato com a central telefonica em si, e na central telefonica instalamos um script em python que realiza a discagem propriamente dita.</p>
-				</section>
-
-				<section>
-					<h2>Redis (1)
-					</h2>
-					<p class="justificado">Redis é um banco de dados do tipo "Chave-Valor", ou seja, Não-SQL, de alto desempenho e que roda em memória. Objetivo dele é armazenar e disponibilizar
-						rapidamente os dados internos da aplicação, ou seja, aqueles dados que não interessam ao Negócio, ao NEC, e que jamais serão alvos de Relatorios.</p>
-				</section>
-
-				<section>
-					<h2>Redis (2)
-					</h2>
-					<p class="justificado">Por ele não permitir consultas em "Massa" como no SQL, e sim um valor apenas por vez, ele é muito escalavel e dificilmente tem problemas de sobrecarga, ao contrario do SQL Server, em que operações de Gerenciamento podem ter impacto na performance do sistema como um todo.</p>
-				</section>
+                                <section>
+                                        <h2>Arquitetura MultCall 2.0
+                                        </h2>
+                                        <img src="./i/Arquitetura.Multcall.2.0.jpg" style="width: 80%; height: 80%" />
+                                </section>
 
 
-				<section>
-					<h2>Python
-					</h2>
-					<p class="justificado">Atualmente, a interface padrão com o Asterisk é feita através da linguagem de programação Python, ela é suportada em todas as versões do Asterisk tanto
-						presentes, passadas quanto futuras.</p>
-					<p class="justificado">O fluxo de controle das ligações fica no python que usa uma série de filas do Redis para comunicação com o Discador.
-						Usando o Redis como meio de comunicação entre o discador e a central, e usando o python dentro da Central, podemos garantir que o Mulcall 2.0 irá funcionar em qualquer versão presente, passado e futura do Asterisk</p>
-				</section>
+                                <section>
+                                        <h2>Multcall 2.0
+                                        </h2>
+                                        <p class="justificado">Como podemos ver na figura anterior, para resolver os 3 problemas atuais do Multcall, criamos uma camada intermediaria entre o multcall e a central aonde
+                                        colocar um banco de dados de alta performance chamada Redis.</p>
+                                        <p class="justificado">Dessa forma, o Multcall escreve no banco de dados Redis sem contato com a central telefonica em si, e na central telefonica instalamos um script em python que realiza a discagem propriamente dita.</p>
+                                </section>
 
-				<section>
-					<h2>Fluxo de Filas do Redis</h2>
-				</section>
+                                <section>
+                                        <h2>Redis (1)
+                                        </h2>
+                                        <p class="justificado">Redis é um banco de dados do tipo "Chave-Valor", ou seja, Não-SQL, de alto desempenho e que roda em memória. Objetivo dele é armazenar e disponibilizar
+                                        rapidamente os dados internos da aplicação, ou seja, aqueles dados que não interessam ao Negócio, ao NEC, e que jamais serão alvos de Relatorios.</p>
+                                </section>
 
-				<section>
-					<img src="./i/FluxoFilasRedis.jpg" style="width: 70%; height: 70%" />
-				</section>
-
-
-				<section>
-					<h2>Gestão do Multcall (1)
-					</h2>
-					<p class="justificado">Em termos de Gestão do Multcall, nada muda, tudo continua nas mesmas telas e o detalhe de se usar os DialWorkers ou o Redis para comunicação com a
-						Central é apenas uma questão interna de configuração. Existem 5 parametros que configuram o Multcall para usar o REDIS:</p>
-				</section>
-
-				<section>
-					<h2>Gestão do Multcall (2)
-					</h2>
-					<ul style="font-size: 24px">
-						<li><strong>Redis Ativar</strong>: Ativa a comunicação com a Central via Redis</li>
-						<li><strong>Redis URL</strong>: URL que aquele Convenio ou Celula irá se conectar ao Redis</li>
-						<li><strong>Redis Workers Ligaca</strong>:Determina o numero de threads que será usada para gerar ligações ao Redis</li>
-						<li><strong>Redis Workers ACK</strong>: Determina o numero de threads que receberá o ACK da central e gerará o CodLigacao</li>
-						<li><strong>Redis Workers Response</strong>: Determina o numero de threads que irá processar o resultado de ligação do Redis</li>
-					</ul>
-				</section>
+                                <section>
+                                        <h2>Redis (2)
+                                        </h2>
+                                        <p class="justificado">Por ele não permitir consultas em "Massa" como no SQL, e sim um valor apenas por vez, ele é muito escalavel e dificilmente tem problemas de sobrecarga, ao contrario do SQL Server, em que operações de Gerenciamento podem ter impacto na performance do sistema como um todo.</p>
+                                </section>
 
 
-				<section>
-					<h2>Gestão do lado da Central (1)
-					</h2>
+                                <section>
+                                        <h2>Python
+                                        </h2>
+                                        <p class="justificado">Atualmente, a interface padrão com o Asterisk é feita através da linguagem de programação Python, ela é suportada em todas as versões do Asterisk tanto
+                                        presentes, passadas quanto futuras.</p>
+                                        <p class="justificado">O fluxo de controle das ligações fica no python que usa uma série de filas do Redis para comunicação com o Discador.
+                                        Usando o Redis como meio de comunicação entre o discador e a central, e usando o python dentro da Central, podemos garantir que o Mulcall 2.0 irá funcionar em qualquer versão presente, passado e futura do Asterisk</p>
+                                </section>
 
-					<p class="justificado">Do lado da central é apenas necessário que se instale e execute o script em python disponivel no seguinte repositorio do git:</p>
+                                <section>
+                                        <h2>Fluxo de Filas do Redis</h2>
+                                </section>
 
-					<blockquote class="">http://srv01stm136.dominio.zanc.com.br/ Telecom/ UraReconhecimentoVoz</blockquote>
-
-				</section>
-
-				<section>
-					<h2>Gestão do lado da Central (2)
-					</h2>
-					<p class="justificado">Para a instalação é apenas necessário:</p>
-					<ul style="font-size: 24px">
-						<li>Executar o git clone desse repositorio</li>
-						<li>Instalar o pacote redis para python através do comando:</li>
-						<blockquote>pip install redis</blockquote>
-						<li>Configurar as filas em <strong>src/settings.py</strong></li>
-					</ul>
-				</section>
+                                <section>
+                                        <img src="./i/FluxoFilasRedis.jpg" style="width: 70%; height: 70%" />
+                                </section>
 
 
-				<section>
-					<h2>Execução do Python na Central
-					</h2>
+                                <section>
+                                        <h2>Gestão do Multcall (1)
+                                        </h2>
+                                        <p class="justificado">Em termos de Gestão do Multcall, nada muda, tudo continua nas mesmas telas e o detalhe de se usar os DialWorkers ou o Redis para comunicação com a
+                                        Central é apenas uma questão interna de configuração. Existem 5 parametros que configuram o Multcall para usar o REDIS:</p>
+                                </section>
 
-					<p class="justificado">Uma vez instalado o redis, podemos ir para o diretorio criado pelo git clone e executar </p>
-
-					<blockquote class="">.\run.sh $NomeCelula</blockquote>
-
-					<p class="justificado">Aonde NomeCelula é o numero da celula configurado no arquivo settings.py do diretorio src/settings.py</p>
-				</section>
-
-				<section>
-					<h2>Formato Arquivo Settings.py</h2>
-					<img src="./i/settings.png" style="width: 80%; height: 80%" />
-				</section>
-
-
-				<section>
-					<h2>Arquivo src/settings.py (1)
-					</h2>
-					<ul style="font-size: 24px">
-						<li><strong>LOG_LEVEL</strong>: O Nivel de log a ser gerado pelo script python, nesse momento o default é DEBUG</li>
-						<li><strong>LOG_FORMAT</strong>:O Formato a ser gerado em cada linha de log do script</li>
-						<li><strong>LOG_LOCATION</strong>: A localização dos logs dentro da central</li>
-						<li><strong>redis_host</strong>: O host aonde está configurado o redis para essa central</li>
-						<li><strong>redis_port</strong>: A porta aonde o redis esta ouvindo</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Arquivo src/settings.py (2)
-					</h2>
-					<ul style="font-size: 24px">
-						<li><strong>Timeout_Command_Response</strong> Tempo em segundos pela qual devemos esperar pelo ack da resposta da central ao nosso comando </li>
-						<li><strong>Timeout_Command_ACK</strong> Tempo em segundos pela qual devemos esperar pelo ACK do multcall ao nosso ACK</li>
-						<li><strong>Retries</strong>: Numero de tentativas que deve ser feitas de envio de comando a central.</li>
-					</ul>
-				</section>
+                                <section>
+                                        <h2>Gestão do Multcall (2)
+                                        </h2>
+                                        <ul style="font-size: 24px">
+                                                <li><strong>Redis Ativar</strong>: Ativa a comunicação com a Central via Redis</li>
+                                                <li><strong>Redis URL</strong>: URL que aquele Convenio ou Celula irá se conectar ao Redis</li>
+                                                <li><strong>Redis Workers Ligaca</strong>:Determina o numero de threads que será usada para gerar ligações ao Redis</li>
+                                                <li><strong>Redis Workers ACK</strong>: Determina o numero de threads que receberá o ACK da central e gerará o CodLigacao</li>
+                                                <li><strong>Redis Workers Response</strong>: Determina o numero de threads que irá processar o resultado de ligação do Redis</li>
+                                        </ul>
+                                </section>
 
 
-				<section>
-					<h2>Queues em src/settings.py
-					</h2>
-					<p class="justificado">O Campo Queues do arquivo de settings é um array com todas as células que esse script pode executar. Ele contém apenas 2 campos:</p>
-					<ul style="font-size: 24px">
-						<li><strong>nome</strong>: O nome da célula no Multcall, que deve ser igual a usada no multcall, senão não funcionará</li>
-						<li><strong>threads</strong>: O numero de threads, ou seja, o numero máximo de ligações que poderá ser executado por esses script.</li>
-					</ul>
-				</section>
+                                <section>
+                                        <h2>Gestão do lado da Central (1)
+                                        </h2>
+
+                                        <p class="justificado">Do lado da central é apenas necessário que se instale e execute o script em python disponivel no seguinte repositorio do git:</p>
+
+                                        <blockquote class="">http://srv01stm136.dominio.zanc.com.br/ Telecom/ UraReconhecimentoVoz</blockquote>
+
+                                </section>
+
+                                <section>
+                                        <h2>Gestão do lado da Central (2)
+                                        </h2>
+                                        <p class="justificado">Para a instalação é apenas necessário:</p>
+                                        <ul style="font-size: 24px">
+                                                <li>Executar o git clone desse repositorio</li>
+                                                <li>Instalar o pacote redis para python através do comando:</li>
+                                                <blockquote>pip install redis</blockquote>
+                                                <li>Configurar as filas em <strong>src/settings.py</strong></li>
+                                        </ul>
+                                </section>
 
 
-				<section>
-					<h2>Monitoramento das Filas do Redis (1)
-					</h2>
-					<p class="justificado">Para monitoramento das filas do Redis, e detecção de qualquer gargalo ou sobrecarga, foi desenvolvido um simples programa de 
-						monitoramento. Ele é bastante simples, apenas informar o servidor e o intervalo de atualização desejado e clicar em iniciar e
-						o programa irá mostrar em tempo real todas as informações armazenadas no Redis como em demonstrado embaixo:</p>
-				</section>
-				<section>
-					<h2>Monitoramento das Filas do Redis (2)
-					</h2>
-					<img src="./i/redismonitor.png" style="width: 80%; height: 80%" />
-				</section>
+                                <section>
+                                        <h2>Execução do Python na Central
+                                        </h2>
 
-				<section>
-					<h2>Conclusão e Trabalhos Futuros
-					</h2>
-					<p class="justificado">Criando uma camada intermediária entre a Central e o Multcall, conseguimos resolver dessa forma, uma série de problemas que comprometiam o seu uso na operação no dia-a-dia. Os proximos passos sao:</p> 
-					<ul style="font-size: 24px">
-						<li>Mover todos os dados internos da aplicação para fora do SQL Server e para o Redis</li>
-						<li>Implantar a metodologia apresentada na discagem Preditiva</li>
-					</ul>
+                                        <p class="justificado">Uma vez instalado o redis, podemos ir para o diretorio criado pelo git clone e executar </p>
 
-				</section>
-			</div>
+                                        <blockquote class="">.\run.sh $NomeCelula</blockquote>
 
-		</div>
-		<script src="./lib/js/head.min.js"></script>
-		<script src="./js/reveal.min.js"></script>
-		<script>
+                                        <p class="justificado">Aonde NomeCelula é o numero da celula configurado no arquivo settings.py do diretorio src/settings.py</p>
+                                </section>
+
+                                <section>
+                                        <h2>Formato Arquivo Settings.py</h2>
+                                        <img src="./i/settings.png" style="width: 80%; height: 80%" />
+                                </section>
+
+
+                                <section>
+                                        <h2>Arquivo src/settings.py (1)
+                                        </h2>
+                                        <ul style="font-size: 24px">
+                                                <li><strong>LOG_LEVEL</strong>: O Nivel de log a ser gerado pelo script python, nesse momento o default é DEBUG</li>
+                                                <li><strong>LOG_FORMAT</strong>:O Formato a ser gerado em cada linha de log do script</li>
+                                                <li><strong>LOG_LOCATION</strong>: A localização dos logs dentro da central</li>
+                                                <li><strong>redis_host</strong>: O host aonde está configurado o redis para essa central</li>
+                                                <li><strong>redis_port</strong>: A porta aonde o redis esta ouvindo</li>
+                                        </ul>
+                                </section>
+
+                                <section>
+                                        <h2>Arquivo src/settings.py (2)
+                                        </h2>
+                                        <ul style="font-size: 24px">
+                                                <li><strong>Timeout_Command_Response</strong> Tempo em segundos pela qual devemos esperar pelo ack da resposta da central ao nosso comando </li>
+                                                <li><strong>Timeout_Command_ACK</strong> Tempo em segundos pela qual devemos esperar pelo ACK do multcall ao nosso ACK</li>
+                                                <li><strong>Retries</strong>: Numero de tentativas que deve ser feitas de envio de comando a central.</li>
+                                        </ul>
+                                </section>
+
+
+                                <section>
+                                        <h2>Queues em src/settings.py
+                                        </h2>
+                                        <p class="justificado">O Campo Queues do arquivo de settings é um array com todas as células que esse script pode executar. Ele contém apenas 2 campos:</p>
+                                        <ul style="font-size: 24px">
+                                                <li><strong>nome</strong>: O nome da célula no Multcall, que deve ser igual a usada no multcall, senão não funcionará</li>
+                                                <li><strong>threads</strong>: O numero de threads, ou seja, o numero máximo de ligações que poderá ser executado por esses script.</li>
+                                        </ul>
+                                </section>
+
+
+                                <section>
+                                        <h2>Monitoramento das Filas do Redis (1)
+                                        </h2>
+                                        <p class="justificado">Para monitoramento das filas do Redis, e detecção de qualquer gargalo ou sobrecarga, foi desenvolvido um simples programa de 
+                                        monitoramento. Ele é bastante simples, apenas informar o servidor e o intervalo de atualização desejado e clicar em iniciar e
+                                        o programa irá mostrar em tempo real todas as informações armazenadas no Redis como em demonstrado embaixo:</p>
+                                </section>
+                                <section>
+                                        <h2>Monitoramento das Filas do Redis (2)
+                                        </h2>
+                                        <img src="./i/redismonitor.png" style="width: 80%; height: 80%" />
+                                </section>
+
+                                <section>
+                                        <h2>Conclusão e Trabalhos Futuros
+                                        </h2>
+                                        <p class="justificado">Criando uma camada intermediária entre a Central e o Multcall, conseguimos resolver dessa forma, uma série de problemas que comprometiam o seu uso na operação no dia-a-dia. Os proximos passos sao:</p> 
+                                        <ul style="font-size: 24px">
+                                                <li>Mover todos os dados internos da aplicação para fora do SQL Server e para o Redis</li>
+                                                <li>Implantar a metodologia apresentada na discagem Preditiva</li>
+                                        </ul>
+
+                                </section>
+                        </div>
+
+                </div>
+                <script src="./lib/js/head.min.js"></script>
+                <script src="./js/reveal.min.js"></script>
+                <script>
                         Reveal.initialize({
-                            // Display controls in the bottom right corner
-                            controls: true,
-                            // Display a presentation progress bar
-                            progress: true,
-                            // If true; each slide will be pushed to the browser history
-                            history: true,
-                            // Loops the presentation, defaults to false
-                            loop: false,
-                            // Flags if mouse wheel navigation should be enabled
-                            mouseWheel: true,
-                            // Apply a 3D roll to links on hover
-                            rollingLinks: true,
-                            // UI style
-                            theme: Reveal.getQueryHash().theme || 'default',
-                            // Transition style
-                            transition: 'Fade',
-                            pdfMaxPagesPerSlide: 1,
+                                // Display controls in the bottom right corner
+                                controls: true,
+                                // Display a presentation progress bar
+                                progress: true,
+                                // If true; each slide will be pushed to the browser history
+                                history: true,
+                                // Loops the presentation, defaults to false
+                                loop: false,
+                                // Flags if mouse wheel navigation should be enabled
+                                mouseWheel: true,
+                                // Apply a 3D roll to links on hover
+                                rollingLinks: true,
+                                // UI style
+                                theme: Reveal.getQueryHash().theme || 'default',
+                                // Transition style
+                                transition: 'Fade',
+                                pdfMaxPagesPerSlide: 1,
 
-                            dependencies: [{
-                                    src: './plugin/highlight/highlight.js',
-                                    async: true,
-                                    callback: function () {
-                                        hljs.initHighlightingOnLoad();
-                                    }
+                                dependencies: [{
+                                        src: './plugin/highlight/highlight.js',
+                                        async: true,
+                                        callback: function () {
+                                                hljs.initHighlightingOnLoad();
+                                        }
                                 }]
                         });
-		</script>
-		<script type="text/javascript" src="./plugin/highlight/highlight.js"></script>
-	</body>
+                </script>
+                <script type="text/javascript" src="./plugin/highlight/highlight.js"></script>
+        </body>
 
 </html>
