@@ -94,9 +94,9 @@ body>div>div.slides>section.present>ul>li>strong {
                                 <section>
                                         <h2>Desafios nos Fluxos de Dados (2)</h2>
                                         <ul>
-                                                <li><strong>Analise de Dados</strong>: Telefonia é o segundo maior gasto de uma empresa de callcenter, então na realidade o lucro da empresa é minimizar
+                                                <li><strong>Análise de Dados</strong>: Telefonia é o segundo maior gasto de uma empresa de callcenter, então na realidade o lucro da empresa é minimizar
                                                         o custo com telefonia, ou seja, apenas ligar para pessoas em que realmente esse contato possa surtir efeito. Para tanto, existe um setor 
-                                                        de Analise de Dados que prioriza os clientes a serem acionados As pessoas que executam essa análise não tem
+                                                        de Análise de Dados que prioriza os clientes a serem acionados As pessoas que executam essa análise não tem
                                                         formação em programação.</li>
                                                 <li><strong>Localizacao de Clientes</strong>: Como utilizamos diversas ferramentas de CRM e discadores, existe uma dificuldade imensa de consolidar os dados
                                                         sobre cada um dos CPFs na base de dados, uma vez que um cliente pode estar devendo para várias empresas conveniadas ao mesmo tempo, e a 
@@ -109,12 +109,12 @@ body>div>div.slides>section.present>ul>li>strong {
                                         devem ser feitos no momento em que o problema é detectado.</p>
 
                                         <p class="justificado">A Empresa sempre usou bastante .NET e PHP nos seus processos internos, mas, existe a necessidade de treinar pessoas sem formação em 
-                                        programação para que programassem pequenos programas para pequenos tratamentos de arquivos e de ajustes em dados ou analises.</p>
+                                        programação para que programassem pequenos programas para pequenos tratamentos de arquivos e de ajustes em dados ou análises.</p>
 
                                 </section>
                                 <section>
                                         <h2>Porque Python? (2)</h2>
-                                        <p class="justificado">Nesse quesito de ser uma linguagem de facil aprendizado, versatil tanto na parte de analise de dados, como tratamento deles, além de 
+                                        <p class="justificado">Nesse quesito de ser uma linguagem de fácil aprendizado, versatil tanto na parte de análise de dados, como tratamento deles, além de 
                                         possibilidade de servir web e rodar em qualquer plataforma, fez com que selecionassemos o python como "lingua franca" da empresa.</p>
 
                                         <p class="justificado">Atualmente todos os futuros desenvolvimentos de sofware da empresa são feitos em python.</p>
@@ -143,7 +143,7 @@ body>div>div.slides>section.present>ul>li>strong {
                                 </section>
 
                                 <section>
-                                        <h2>Python na Analise dos Dados</h2>
+                                        <h2>Python na Análise dos Dados</h2>
 
                                         <p class="justificado">Uma vez carregado os dados para dentro do CRM, é necessário que se faça a análise de quais clientes serão acionados ou não, oque gera o arquivo
                                         de mailing que é carregado no discador que efetua as ligações, uma vez o cliente atendendo, essa ligação é passada para um atendente que efetua o contato.</p>
@@ -182,11 +182,12 @@ body>div>div.slides>section.present>ul>li>strong {
                                         a empresa são cadastradas nessa base é possível ter milhares de conexões e atualizações simultâneas, oque o async nos pareceu a melhor solução.</a>
                                 </section>
                                 <section>
-                                        <h2>Oque é o Multcall</h2>
-                                        <p class="justificado">O Multcall é o sistema discador desenvolvido pela própria zanc pelos ultimos 10 anos. Ele é escrito em .NET e utiliza um banco de dados SQL Server
-                                        tanto para os dados internos da aplicação quanto os dados do négócio (Clientes, Ligações, Contatos, etc...)</p>
-                                        <p class="justificado">Atualmente a Zanc tem testado diversos outras plataformas de discagem, mas, o retorno ao negócio não tem sido significativo o suficiente para
-                                        justificar o custo adicional de licenças de um software terceiro.</p>
+                                        <h2>Discador</h2>
+                                        <p class="justificado">Mas, o principal impacto que a utilização do python na nossa empresa trouxe foi no discador, que é o software que realiza a ligação ao cliente final, que identifica se
+                                        ocorreu o alô dele, e passa para um operador para realizar a ligação. </p>
+
+                                        <p class="justificado">Nossa solução atual foi feita em 2005, em .NET, mas, infelizmente com o tempo se mostrou inadequada e estamos trocando a arquitetura da discagem em si de .NET para python, oque 
+                                        veremos nos próximos slides.</p>
                                 </section>
                                 <section>
                                         <h2>Oque é o Multcall</h2>
@@ -202,9 +203,6 @@ body>div>div.slides>section.present>ul>li>strong {
                                         <img src="./i/Arquitetura.Multcall1.0.jpg" style="width: 80%; height: 80%" />
                                 </section>
 
-
-
-
                                 <section>
                                         <h2>Problemas com o Multcall 1.0
                                         </h2>
@@ -212,8 +210,8 @@ body>div>div.slides>section.present>ul>li>strong {
                                         Em termos concretos, os problemas do Multcall Atualmente são:</p>
 
                                         <ul style="font-size: 24px">
-                                                <li><strong>Escalabilidade</strong>: Capacidade de facilmente aumentar o numero de operadores logados.</li>
-                                                <li><strong>Versao Asterisk</strong>: Atrelamento fixo do Multcall a uma especifica versão do Multcall</li>
+                                                <li><strong>Escalabilidade</strong>: Capacidade de fácilmente aumentar o número de operadores logados.</li>
+                                                <li><strong>Versao Asterisk</strong>: Atrelamento fixo do Multcall a uma específica versão do Multcall</li>
                                                 <li><strong>Balanceamento de Carga</strong>: Dificuldade em distribuir a carga de ligações entre diversas centrais.</li>
                                         </ul>
 
@@ -230,7 +228,7 @@ body>div>div.slides>section.present>ul>li>strong {
                                 <section>
                                         <h2>Escalabilidade (2)
                                         </h2>
-                                        <p class="justificado">Um dos exemplos mais claros é a questão das leituras de parametros, pois por ser um sistema em tempo real em que a reconfiguração dos parametros
+                                        <p class="justificado">Um dos exemplos mais claros é a questão das leituras de parâmetros, pois por ser um sistema em tempo real em que a reconfiguração dos parametros
                                         do sistema tem que ter impacto direto na operação, essa leitura de parametros (que não pertencem ao negocio em si) pode causar lentidão em operações
                                         de sistema como a carga e/ou manipulação de um mailing.</p>
                                 </section>
