@@ -101,7 +101,7 @@ body>div>div.slides>section.present>ul>li>strong {
                                                         o custo com telefonia, ou seja, apenas ligar para pessoas em que realmente esse contato possa surtir efeito. Para tanto, existe um setor 
                                                         de Análise de Dados que prioriza os clientes a serem acionados As pessoas que executam essa análise não tem
                                                         formação em programação.</li>
-                                                <li><strong>Localizacao de Clientes</strong>: Como utilizamos diversas ferramentas de CRM e discadores, existe uma dificuldade imensa de consolidar os dados
+                                                <li><strong>Localização de Clientes</strong>: Como utilizamos diversas ferramentas de CRM e discadores, existe uma dificuldade imensa de consolidar os dados
                                                         sobre cada um dos CPFs na base de dados, uma vez que um cliente pode estar devendo para várias empresas conveniadas ao mesmo tempo, e a 
                                                         informação de acionamento de um CRM pode e deve ser usada por outro CRM de outro convênio.</li>
                                         </ul>
@@ -123,7 +123,7 @@ body>div>div.slides>section.present>ul>li>strong {
                                         <p class="justificado">Atualmente todos os futuros desenvolvimentos de sofware da empresa são feitos em python.</p>
                                 </section>
                                 <section>
-                                        <h2>Python na Recepcao de Dados</h2>
+                                        <h2>Python na Recepção de Dados</h2>
 
                                         <p class="justificado">A Vasta maioria dos dados é recepcionado por arquivos de texto, esses arquivos de texto são recepcionados por FTP em diversos formatos como
                                         CSV, delimitado, campo fixo entre outros. Esses arquivos tem em geral centenas de campos que podem mudar de uma hora para outra. Também existe
@@ -162,13 +162,13 @@ body>div>div.slides>section.present>ul>li>strong {
                                 <section>
                                         <p class="justificado">Temos 2 projetos piloto utilizando python para machine learning nessa area:</p>
                                         <ul>
-                                                <li><strong>Herval Deep Mailing</strong> - Para cálculo de propensão de pagamentos da carteira Herval (Usando XGBoost)<BR><a href="">https://github.com/gbencke/HervalDeepMailing</a></li>
+                                                <li><strong>Herval Deep Mailing</strong> - Para cálculo de propensão de pagamentos da carteira Herval (Usando XGBoost)<BR><a href="https://github.com/gbencke/HervalDeepMailing">https://github.com/gbencke/HervalDeepMailing</a></li>
                                                 <BR>
-                                                <li><strong>Deep Mailing</strong> - Para cálculo de probabilidade de atendimento de ligação da carteira ITAUCARD (Usando XGBoost)<BR><a href="">https://github.com/gbencke/DeepMailing</a></li>
+                                                <li><strong>Deep Mailing</strong> - Para cálculo de probabilidade de atendimento de ligação da carteira ITAUCARD (Usando XGBoost)<BR><a href="https://github.com/gbencke/DeepMailing">https://github.com/gbencke/DeepMailing</a></li>
                                         </ul>
                                 </section>
                                 <section>
-                                        <h2>Python na Localizacao</h2>
+                                        <h2>Python na Localização</h2>
                                         <p class="justificado">Como falamos anteriormente, um cliente pode estar em diversos convenios ao mesmo tempo, então é fundamental que as ocorrencias entre os CRMs sejam compartilhados.
                                         Isso é extremamente crítico no caso da localização de telefones onde um cliente pode ter 5 telefones num CRM que atende uma empresa, mas, o mesmo cliente pode
                                         estar cadastrado em outro CRM de outro Convênio com outros telefones. E existe uma oportunidade de economia se não discamos os telefones de um cliente num CRM, se
@@ -221,19 +221,11 @@ body>div>div.slides>section.present>ul>li>strong {
                                 </section>
 
                                 <section>
-                                        <h2>Escalabilidade (1)
+                                        <h2>Escalabilidade 
                                         </h2>
                                         <p class="justificado">Um dos grandes problemas com o Multcall 1.0 é que o mesmo banco de dados serve tanto para os dados do negocio quanto para os dados
                                         internos da aplicação (Direitos, Operadores Disponiveis, Filas de Discagem, etc...), dessa forma, o quanto mais operadores você colocar em uma
                                         operação, mais o sistema irá ter a sua performance degradada. </p>
-                                </section>
-
-                                <section>
-                                        <h2>Escalabilidade (2)
-                                        </h2>
-                                        <p class="justificado">Um dos exemplos mais claros é a questão das leituras de parâmetros, pois por ser um sistema em tempo real em que a reconfiguração dos parametros
-                                        do sistema tem que ter impacto direto na operação, essa leitura de parametros (que não pertencem ao negocio em si) pode causar lentidão em operações
-                                        de sistema como a carga e/ou manipulação de um mailing.</p>
                                 </section>
 
                                 <section>
@@ -302,45 +294,10 @@ body>div>div.slides>section.present>ul>li>strong {
 
 
                                 <section>
-                                        <h2>Gestão do Multcall (1)
+                                        <h2>Gestão do Multcall 
                                         </h2>
                                         <p class="justificado">Em termos de Gestão do Multcall, nada muda, tudo continua nas mesmas telas e o detalhe de se usar os DialWorkers ou o Redis para comunicação com a
                                         Central é apenas uma questão interna de configuração. Existem 5 parametros que configuram o Multcall para usar o REDIS:</p>
-                                </section>
-
-                                <section>
-                                        <h2>Gestão do Multcall (2)
-                                        </h2>
-                                        <ul style="font-size: 24px">
-                                                <li><strong>Redis Ativar</strong>: Ativa a comunicação com a Central via Redis</li>
-                                                <li><strong>Redis URL</strong>: URL que aquele Convenio ou Celula irá se conectar ao Redis</li>
-                                                <li><strong>Redis Workers Ligaca</strong>:Determina o numero de threads que será usada para gerar ligações ao Redis</li>
-                                                <li><strong>Redis Workers ACK</strong>: Determina o numero de threads que receberá o ACK da central e gerará o CodLigacao</li>
-                                                <li><strong>Redis Workers Response</strong>: Determina o numero de threads que irá processar o resultado de ligação do Redis</li>
-                                        </ul>
-                                </section>
-
-
-                                <section>
-                                        <h2>Gestão do lado da Central (1)
-                                        </h2>
-
-                                        <p class="justificado">Do lado da central é apenas necessário que se instale e execute o script em python disponivel no seguinte repositorio do git:</p>
-
-                                        <blockquote class="">http://srv01stm136.dominio.zanc.com.br/ Telecom/ UraReconhecimentoVoz</blockquote>
-
-                                </section>
-
-                                <section>
-                                        <h2>Gestão do lado da Central (2)
-                                        </h2>
-                                        <p class="justificado">Para a instalação é apenas necessário:</p>
-                                        <ul style="font-size: 24px">
-                                                <li>Executar o git clone desse repositorio</li>
-                                                <li>Instalar o pacote redis para python através do comando:</li>
-                                                <blockquote>pip install redis</blockquote>
-                                                <li>Configurar as filas em <strong>src/settings.py</strong></li>
-                                        </ul>
                                 </section>
 
 
@@ -354,46 +311,6 @@ body>div>div.slides>section.present>ul>li>strong {
 
                                         <p class="justificado">Aonde NomeCelula é o numero da celula configurado no arquivo settings.py do diretorio src/settings.py</p>
                                 </section>
-
-                                <section>
-                                        <h2>Formato Arquivo Settings.py</h2>
-                                        <img src="./i/settings.png" style="width: 80%; height: 80%" />
-                                </section>
-
-
-                                <section>
-                                        <h2>Arquivo src/settings.py (1)
-                                        </h2>
-                                        <ul style="font-size: 24px">
-                                                <li><strong>LOG_LEVEL</strong>: O Nivel de log a ser gerado pelo script python, nesse momento o default é DEBUG</li>
-                                                <li><strong>LOG_FORMAT</strong>:O Formato a ser gerado em cada linha de log do script</li>
-                                                <li><strong>LOG_LOCATION</strong>: A localização dos logs dentro da central</li>
-                                                <li><strong>redis_host</strong>: O host aonde está configurado o redis para essa central</li>
-                                                <li><strong>redis_port</strong>: A porta aonde o redis esta ouvindo</li>
-                                        </ul>
-                                </section>
-
-                                <section>
-                                        <h2>Arquivo src/settings.py (2)
-                                        </h2>
-                                        <ul style="font-size: 24px">
-                                                <li><strong>Timeout_Command_Response</strong> Tempo em segundos pela qual devemos esperar pelo ack da resposta da central ao nosso comando </li>
-                                                <li><strong>Timeout_Command_ACK</strong> Tempo em segundos pela qual devemos esperar pelo ACK do multcall ao nosso ACK</li>
-                                                <li><strong>Retries</strong>: Numero de tentativas que deve ser feitas de envio de comando a central.</li>
-                                        </ul>
-                                </section>
-
-
-                                <section>
-                                        <h2>Queues em src/settings.py
-                                        </h2>
-                                        <p class="justificado">O Campo Queues do arquivo de settings é um array com todas as células que esse script pode executar. Ele contém apenas 2 campos:</p>
-                                        <ul style="font-size: 24px">
-                                                <li><strong>nome</strong>: O nome da célula no Multcall, que deve ser igual a usada no multcall, senão não funcionará</li>
-                                                <li><strong>threads</strong>: O numero de threads, ou seja, o numero máximo de ligações que poderá ser executado por esses script.</li>
-                                        </ul>
-                                </section>
-
 
                                 <section>
                                         <h2>Monitoramento das Filas do Redis (1)
@@ -415,6 +332,7 @@ body>div>div.slides>section.present>ul>li>strong {
                                         <ul style="font-size: 24px">
                                                 <li>Mover todos os dados internos da aplicação para fora do SQL Server e para o Redis</li>
                                                 <li>Implantar a metodologia apresentada na discagem Preditiva</li>
+                                                <li>Trocar o numero fixo de threads por Async usando Python 3.6</li>
                                         </ul>
 
                                 </section>
